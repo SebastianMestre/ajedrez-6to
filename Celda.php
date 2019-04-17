@@ -1,15 +1,17 @@
 <?php
 
 class Celda {
-  private $x_;
-  private $y_;
+  private $x_; /* int */
+  private $y_; /* int */
 
   public function __construct ( string $pos ) {
     $this->x_ = ord( $pos[0] ) - ord('A');
     $this->y_ = ord( $pos[1] ) - ord('1');
   }
 
-  public function desplazada (int $dx, int $dy) {
+  // Devuelve una nueva Celda desplazada tanto como se indique de donde
+  // se encuentra la instancia sobre la cual se llama el metodo
+  public function desplazada (int $dx, int $dy) /* -> Celda */ {
     $resultado = clone $this;
     
     $resultado->x_ += $dx;

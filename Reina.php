@@ -7,12 +7,16 @@ require ('Celda.php');
 
 class Reina implements PiezaDeAjedrez {
 
-  private $posicion /* : Celda */;
+  private $posicion; /* Celda */
   
   public function __construct ( string $celda ) {
     $this->posicion = new Celda($celda);
   } 
 
+  // Devuelve una lista con todos los movimientos que puede realizar
+  // la Reina desde su posicion actual
+  // La reina puede moverse tantas casillas como quiera sobre las
+  // diagonales y sobre la horizontal y la vertical.
   public function movimientosPosibles () /* -> Celda[] */ {
     $resultado = [];
 
@@ -27,26 +31,30 @@ class Reina implements PiezaDeAjedrez {
         "Abajo"           => $this->posicion->desplazada(  0,-$i),
         "DerechaAbajo"    => $this->posicion->desplazada( $i,-$i)];
       
-      foreach ( $direcciones as $celda )
+      foreach ( $direcciones as $celda ) {
         if ( 0 <= $celda->x() && $celda->x() < 8
-          && 0 <= $celda->y() && $celda->y() < 8 )
+          && 0 <= $celda->y() && $celda->y() < 8 ) {
           array_push($resultado, $celda);
-
+        }
+      }
     }
     
     return $resultado;
   }
 
-	public function posicionarEn ( string $celda ) {
-	  $celdaTipada = new Celda($celda);
+  // Mueve la reina a la posicion que se pasa.
+  // Si la posicion es invalida, lanza un error.
+  public function posicionarEn ( string $celda ) {
+    $celdaTipada = new Celda($celda);
 
-		$movimientosPosibles = $this->movimientosPosibles ();
+    $movimientosPosibles = $this->movimientosPosibles ();
 
-		if (in_array($celdaTipada, $movimientosPosibles)) {
-			$this->posicion = $celdaTipada;
-		} else {
-			throw "Celda invalida";
-		}
-	}
+    if (in_array($celdaTipada, $movimientosPosibles)) {
+      $this->posicion = $celdaTipada;
+    } else {
+      // TODO: Hay una mejor forma de manejar jugadas invalidas?
+      throw new Exception("Celda invalida.");
+    }
+  }
 
-}
+
