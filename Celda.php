@@ -10,11 +10,11 @@ class Celda {
   }
 
   public function desplazada (int $dx, int $dy) {
-    $resultado = $this;
+    $resultado = clone $this;
     
-    $resultado->x += $dx;
-    $resultado->y += $dy;
-    
+    $resultado->x_ += $dx;
+    $resultado->y_ += $dy;
+
     return $resultado;
   }
 

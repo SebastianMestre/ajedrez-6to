@@ -27,14 +27,14 @@ class Reina implements PiezaDeAjedrez {
         "Abajo"           => $this->posicion->desplazada(  0,-$i),
         "DerechaAbajo"    => $this->posicion->desplazada( $i,-$i)];
       
-      foreach ( $celda as $direcciones )
+      foreach ( $direcciones as $celda )
         if ( 0 <= $celda->x() && $celda->x() < 8
           && 0 <= $celda->y() && $celda->y() < 8 )
           array_push($resultado, $celda);
 
     }
     
-    return $result;
+    return $resultado;
   }
 
 	public function posicionarEn ( string $celda ) {
